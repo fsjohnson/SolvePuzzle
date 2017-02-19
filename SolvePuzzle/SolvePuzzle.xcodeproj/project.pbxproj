@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B50C83FA1E592F960093E5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C83F91E592F960093E5F1 /* AppDelegate.swift */; };
-		B50C83FF1E592F960093E5F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B50C83FD1E592F960093E5F1 /* Main.storyboard */; };
 		B50C84011E592F960093E5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B50C84001E592F960093E5F1 /* Assets.xcassets */; };
-		B50C84041E592F960093E5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B50C84021E592F960093E5F1 /* LaunchScreen.storyboard */; };
 		B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */; };
 		B50C840F1E59314A0093E5F1 /* Programmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840E1E59314A0093E5F1 /* Programmer.swift */; };
 		B50C84111E5931630093E5F1 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84101E5931630093E5F1 /* Location.swift */; };
@@ -25,9 +23,7 @@
 /* Begin PBXFileReference section */
 		B50C83F61E592F960093E5F1 /* SolvePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolvePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50C83F91E592F960093E5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B50C83FE1E592F960093E5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B50C84001E592F960093E5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B50C84031E592F960093E5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B50C84051E592F960093E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		B50C840E1E59314A0093E5F1 /* Programmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programmer.swift; sourceTree = "<group>"; };
@@ -76,9 +72,7 @@
 				B50C84121E5931980093E5F1 /* Models */,
 				B50C84201E5932F90093E5F1 /* Views */,
 				B50C840D1E59313B0093E5F1 /* Controllers */,
-				B50C83FD1E592F960093E5F1 /* Main.storyboard */,
 				B50C84001E592F960093E5F1 /* Assets.xcassets */,
-				B50C84021E592F960093E5F1 /* LaunchScreen.storyboard */,
 				B50C84051E592F960093E5F1 /* Info.plist */,
 			);
 			path = SolvePuzzle;
@@ -180,10 +174,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B50C84041E592F960093E5F1 /* LaunchScreen.storyboard in Resources */,
 				B50C84161E5931CC0093E5F1 /* ios_model_challenge.json in Resources */,
 				B50C84011E592F960093E5F1 /* Assets.xcassets in Resources */,
-				B50C83FF1E592F960093E5F1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,25 +199,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		B50C83FD1E592F960093E5F1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B50C83FE1E592F960093E5F1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B50C84021E592F960093E5F1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B50C84031E592F960093E5F1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B50C84061E592F960093E5F1 /* Debug */ = {
@@ -364,6 +337,7 @@
 				B50C840A1E592F960093E5F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
