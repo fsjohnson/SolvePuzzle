@@ -10,6 +10,8 @@ import UIKit
 
 class FrontView: UIView {
 
+    var imageView: UIImageView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -19,8 +21,6 @@ class FrontView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    lazy var imageView = UIImageView()
     
     private func commonInit() {
         imageView = UIImageView()

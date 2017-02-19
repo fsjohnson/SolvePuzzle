@@ -10,30 +10,39 @@ import Foundation
 
 class Programmer {
     var name: String
-    var favorite_color: String
+    var favoriteColor: String
     var age: Int
     var weight: Double
     var phone: String
-    var is_artist: Bool
+    var isArtist: Bool
     var location: Location?
     var platform: String?
     
-    init(dict: [String: Any]) {
-        self.name = dict["name"] as! String
-        self.favorite_color = dict["favorite_color"] as! String
-        self.age = dict["age"] as! Int
-        self.weight = dict["weight"] as! Double
-        self.phone = dict["phone"] as! String
-        self.is_artist = dict["is_artist"] as! Bool
+    init?(dict: [String: Any]) {
+        guard
+            let name = dict["name"] as? String,
+            let favoriteColor = dict["favorite_color"] as? String,
+            let age = dict["age"] as? Int,
+            let weight = dict["weight"] as? Double,
+            let phone = dict["phone"] as? String,
+            let isArtist = dict["is_artist"] as? Bool
+            else { print("Error parsing JSON to Programmer"); return nil }
+            
+        self.name = name
+        self.favoriteColor = favoriteColor
+        self.age = age
+        self.weight = weight
+        self.phone = phone
+        self.isArtist = isArtist
     }
     
     init(name: String, favorite_color: String, age: Int, weight: Double, phone: String, is_artist: Bool) {
         self.name = name
-        self.favorite_color = favorite_color
+        self.favoriteColor = favorite_color
         self.age = age
         self.weight = weight
         self.phone = phone
-        self.is_artist = is_artist
+        self.isArtist = is_artist
     }
     
     convenience init() {

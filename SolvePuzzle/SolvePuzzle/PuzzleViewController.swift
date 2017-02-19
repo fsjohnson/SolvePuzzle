@@ -116,14 +116,16 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         DataStore.getJson { (parsedJson) in
             for location in parsedJson {
                 let location = Location(dict: location)
-                for service in location.services {
+                guard let services = location?.services else { print("Error unwrapping services"); return }
+                for service in services {
                     guard let platform = service["platform"] as? String else { print("Error retrieving platform"); return }
                     guard let programmers = service["programmers"] as? [[String: Any]] else { print("Error getting service[programmers]"); return }
                     for prog in programmers {
                         let newProg = Programmer(dict: prog)
-                        newProg.location = location
-                        newProg.platform = platform
-                        self.programmerArray.append(newProg)
+                        guard let unwrappedNewProg = newProg else { print("Error unwrapping programmer in populateProgrammerInfo"); return }
+                        unwrappedNewProg.location = location
+                        unwrappedNewProg.platform = platform
+                        self.programmerArray.append(unwrappedNewProg)
                     }
                 }
             }

@@ -10,6 +10,9 @@ import UIKit
 
 class BackView: UIView {
     
+    var posseImageView: UIImageView!
+    var stackView: UIStackView!
+    
     weak var programmer: Programmer? {
         didSet {
             commonInit()
@@ -74,82 +77,45 @@ class BackView: UIView {
         return label
     }()
     
-    lazy var posseImageView = UIImageView()
-    
     private func commonInit() {
+        posseImageView = UIImageView()
         posseImageView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(posseImageView)
         posseImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
         posseImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
         posseImageView.image = UIImage(named: "PosseLogo")
         
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(nameLabel)
-        nameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        nameLabel.textAlignment = .center
-        
-        favoriteColorLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(favoriteColorLabel)
-        favoriteColorLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        favoriteColorLabel.textAlignment = .center
-        
-        ageLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(ageLabel)
-        ageLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        ageLabel.textAlignment = .center
-        
-        weightLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(weightLabel)
-        weightLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        weightLabel.textAlignment = .center
-        
-        phoneLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(phoneLabel)
-        phoneLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        phoneLabel.textAlignment = .center
-        
-        isArtistLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(isArtistLabel)
-        isArtistLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        isArtistLabel.textAlignment = .center
-        
-        locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(locationLabel)
-        locationLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        locationLabel.textAlignment = .center
-        
-        platformLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(platformLabel)
-        platformLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        platformLabel.textAlignment = .center
-        
-        let stackView = UIStackView()
+        stackView = UIStackView()
         stackView.axis = UILayoutConstraintAxis.vertical
         stackView.distribution  = UIStackViewDistribution.fillProportionally
         stackView.alignment = UIStackViewAlignment.center
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(favoriteColorLabel)
-        stackView.addArrangedSubview(ageLabel)
-        stackView.addArrangedSubview(weightLabel)
-        stackView.addArrangedSubview(phoneLabel)
-        stackView.addArrangedSubview(isArtistLabel)
-        stackView.addArrangedSubview(locationLabel)
-        stackView.addArrangedSubview(platformLabel)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(stackView)
         stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
         stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
+        
+        let labels = [nameLabel, favoriteColorLabel, ageLabel, weightLabel, phoneLabel, isArtistLabel, locationLabel, platformLabel]
+        for label in labels {
+            stackView.addArrangedSubview(label)
+            configConstraints(of: label)
+        }
+    }
+    
+    private func configConstraints(of label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1).isActive = true
+        label.textAlignment = .center
     }
     
     private func populateLabels() {
         guard let name = programmer?.name else { print("Error unwrapping programmer name in cell"); return}
-        guard let favoriteColor = programmer?.favorite_color else { print("Error unwrapping programmer fav color in cell"); return }
+        guard let favoriteColor = programmer?.favoriteColor else { print("Error unwrapping programmer fav color in cell"); return }
         guard let age = programmer?.age else { print("Error unwrapping programmer age in cell"); return }
         guard let weight = programmer?.weight else { print("Error unwrapping programmer weight in cell"); return }
         guard let phone = programmer?.phone else { print("Error unwrapping programmer phone in cell"); return }
-        guard let isArtist = programmer?.is_artist else { print("Error unwrapping programmer isArtist in cell"); return }
+        guard let isArtist = programmer?.isArtist else { print("Error unwrapping programmer isArtist in cell"); return }
         guard let location = programmer?.location?.locality else { print("Error unwrapping programmer location in cell"); return }
         guard let platform = programmer?.platform else { print("Error unwrapping programmer platform in cell"); return }
         
