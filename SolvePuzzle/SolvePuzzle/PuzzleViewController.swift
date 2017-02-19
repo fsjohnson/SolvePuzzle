@@ -60,11 +60,13 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     func configLayout() {
         self.view.backgroundColor = UIColor.white
         self.title = "Posse Puzzle"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Play Again", style: .done, target: self, action: #selector(playAgain))
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor.white],for: UIControlState.normal)
     }
-    
+
     func configCollectionView() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        imageCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        imageCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), collectionViewLayout: layout)
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
         imageCollectionView.isUserInteractionEnabled = true
@@ -73,7 +75,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         
         imageCollectionView.register(MapCollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
         imageCollectionView.showsVerticalScrollIndicator = false
-        imageCollectionView.backgroundColor = UIColor.clear
+        imageCollectionView.backgroundColor = UIColor.white
         self.view.addSubview(imageCollectionView)
         self.imageCollectionView.allowsSelection = true
     }
@@ -133,6 +135,18 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
             let newProg = Programmer(name: "", favorite_color: "", age: 0, weight: 0.0, phone: "", is_artist: false)
             programmerArray.append(newProg)
         }
+    }
+    
+    func playAgain() {
+        programmerArray.removeAll()
+        imageSlices.removeAll()
+        originalImageOrderArray.removeAll()
+        imageCollectionView.removeFromSuperview()
+        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
+        configLayout()
+        configCellLayout()
+        configCollectionView()
+        isSolved = false
     }
     
     // MARK: - Handle changing order of images

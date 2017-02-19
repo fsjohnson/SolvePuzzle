@@ -18,6 +18,7 @@
 		B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841A1E5932150093E5F1 /* FrontView.swift */; };
 		B50C841D1E5932370093E5F1 /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841C1E5932370093E5F1 /* BackView.swift */; };
 		B50C841F1E5932660093E5F1 /* MapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */; };
+		B50C84241E5942ED0093E5F1 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84231E5942ED0093E5F1 /* LaunchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		B50C841A1E5932150093E5F1 /* FrontView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontView.swift; sourceTree = "<group>"; };
 		B50C841C1E5932370093E5F1 /* BackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
+		B50C84231E5942ED0093E5F1 /* LaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				B50C841A1E5932150093E5F1 /* FrontView.swift */,
+				B50C84231E5942ED0093E5F1 /* LaunchView.swift */,
 				B50C841C1E5932370093E5F1 /* BackView.swift */,
 				B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */,
 			);
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B50C841F1E5932660093E5F1 /* MapCollectionViewCell.swift in Sources */,
+				B50C84241E5942ED0093E5F1 /* LaunchView.swift in Sources */,
 				B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */,
 				B50C84191E5931F10093E5F1 /* Extensions.swift in Sources */,
 				B50C840F1E59314A0093E5F1 /* Programmer.swift in Sources */,

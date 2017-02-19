@@ -12,7 +12,6 @@ class FrontView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("image info init")
         commonInit()
     }
     

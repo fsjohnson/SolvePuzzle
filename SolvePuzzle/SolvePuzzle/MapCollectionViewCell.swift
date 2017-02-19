@@ -16,16 +16,11 @@ class MapCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        configFrontView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        configFrontView()
     }
     
     private func configFrontView() {
