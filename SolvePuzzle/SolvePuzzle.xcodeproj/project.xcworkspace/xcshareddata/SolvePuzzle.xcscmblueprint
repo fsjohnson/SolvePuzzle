@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "550D5C0FFF1AEB020C7F7CE73091CD9BC3BFDDD9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "180B7C2FA5FCF0154D9EDE1262E510428BFDE810" : 9223372036854775807,
+    "550D5C0FFF1AEB020C7F7CE73091CD9BC3BFDDD9" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C8DCE9B4-E1A9-47FB-A594-56A17B7884A0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "180B7C2FA5FCF0154D9EDE1262E510428BFDE810" : "",
+    "550D5C0FFF1AEB020C7F7CE73091CD9BC3BFDDD9" : "SolvePuzzle\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SolvePuzzle",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SolvePuzzle\/SolvePuzzle.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:fjohnson1991\/GetSneaks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "180B7C2FA5FCF0154D9EDE1262E510428BFDE810"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:fjohnson1991\/SolvePuzzle.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "550D5C0FFF1AEB020C7F7CE73091CD9BC3BFDDD9"
+    }
+  ]
+}
