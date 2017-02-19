@@ -21,7 +21,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle to unlock the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
+        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
         configLayout()
         configCellLayout()
         configCollectionView()
