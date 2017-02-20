@@ -12,12 +12,12 @@
 		B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */; };
 		B50C840F1E59314A0093E5F1 /* Programmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840E1E59314A0093E5F1 /* Programmer.swift */; };
 		B50C84111E5931630093E5F1 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84101E5931630093E5F1 /* Location.swift */; };
-		B50C84141E5931AD0093E5F1 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84131E5931AD0093E5F1 /* DataStore.swift */; };
 		B50C84161E5931CC0093E5F1 /* ios_model_challenge.json in Resources */ = {isa = PBXBuildFile; fileRef = B50C84151E5931CC0093E5F1 /* ios_model_challenge.json */; };
 		B50C84191E5931F10093E5F1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84181E5931F10093E5F1 /* Extensions.swift */; };
 		B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841A1E5932150093E5F1 /* FrontView.swift */; };
 		B50C841D1E5932370093E5F1 /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841C1E5932370093E5F1 /* BackView.swift */; };
 		B50C841F1E5932660093E5F1 /* MapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */; };
+		B50C84271E5A4C3C0093E5F1 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84261E5A4C3C0093E5F1 /* PuzzleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +28,12 @@
 		B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		B50C840E1E59314A0093E5F1 /* Programmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programmer.swift; sourceTree = "<group>"; };
 		B50C84101E5931630093E5F1 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		B50C84131E5931AD0093E5F1 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		B50C84151E5931CC0093E5F1 /* ios_model_challenge.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ios_model_challenge.json; sourceTree = "<group>"; };
 		B50C84181E5931F10093E5F1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B50C841A1E5932150093E5F1 /* FrontView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontView.swift; sourceTree = "<group>"; };
 		B50C841C1E5932370093E5F1 /* BackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
+		B50C84261E5A4C3C0093E5F1 /* PuzzleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +68,7 @@
 			children = (
 				B50C83F91E592F960093E5F1 /* AppDelegate.swift */,
 				B50C84181E5931F10093E5F1 /* Extensions.swift */,
+				B50C84251E5A4B950093E5F1 /* ViewModels */,
 				B50C84171E5931D50093E5F1 /* Data */,
 				B50C84121E5931980093E5F1 /* Models */,
 				B50C84201E5932F90093E5F1 /* Views */,
@@ -98,7 +99,6 @@
 		B50C84171E5931D50093E5F1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				B50C84131E5931AD0093E5F1 /* DataStore.swift */,
 				B50C84151E5931CC0093E5F1 /* ios_model_challenge.json */,
 			);
 			name = Data;
@@ -112,6 +112,14 @@
 				B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		B50C84251E5A4B950093E5F1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B50C84261E5A4C3C0093E5F1 /* PuzzleViewModel.swift */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +198,8 @@
 				B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */,
 				B50C84191E5931F10093E5F1 /* Extensions.swift in Sources */,
 				B50C840F1E59314A0093E5F1 /* Programmer.swift in Sources */,
+				B50C84271E5A4C3C0093E5F1 /* PuzzleViewModel.swift in Sources */,
 				B50C84111E5931630093E5F1 /* Location.swift in Sources */,
-				B50C84141E5931AD0093E5F1 /* DataStore.swift in Sources */,
 				B50C841D1E5932370093E5F1 /* BackView.swift in Sources */,
 				B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */,
 				B50C83FA1E592F960093E5F1 /* AppDelegate.swift in Sources */,
