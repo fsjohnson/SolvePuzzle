@@ -36,16 +36,16 @@ class Programmer {
         self.isArtist = isArtist
     }
     
-    init(name: String, favorite_color: String, age: Int, weight: Double, phone: String, is_artist: Bool) {
+    init(name: String, favoriteColor: String, age: Int, weight: Double, phone: String, isArtist: Bool) {
         self.name = name
-        self.favoriteColor = favorite_color
+        self.favoriteColor = favoriteColor
         self.age = age
         self.weight = weight
         self.phone = phone
-        self.isArtist = is_artist
+        self.isArtist = isArtist
     }
     
     convenience init() {
-        self.init(name: "", favorite_color: "", age: 0, weight: 0.0, phone: "", is_artist: false)
+        self.init(name: "", favoriteColor: "", age: 0, weight: 0.0, phone: "", isArtist: false)
     }
 }

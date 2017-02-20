@@ -47,7 +47,7 @@ class PuzzleViewModel {
     
     func checkCellCount() {
         if programmerArray.count < imageSlices.count {
-            let newProg = Programmer(name: "", favorite_color: "", age: 0, weight: 0.0, phone: "", is_artist: false)
+            let newProg = Programmer(name: "", favoriteColor: "", age: 0, weight: 0.0, phone: "", isArtist: false)
             programmerArray.append(newProg)
         }
     }

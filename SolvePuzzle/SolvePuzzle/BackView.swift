@@ -77,6 +77,7 @@ class BackView: UIView {
         return label
     }()
     
+    // MARK: - Config view layout
     private func commonInit() {
         posseImageView = UIImageView()
         posseImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,6 +110,30 @@ class BackView: UIView {
         label.textAlignment = .center
     }
     
+    private func configBorder() {
+        guard let location = programmer?.location?.locality else { print("Error unwrapping programmer location"); return }
+        switch location {
+        case "New York":
+            posseImageView.removeFromSuperview()
+            self.layer.borderWidth = 3.0
+            self.layer.borderColor = UIColor.themeYellow.cgColor
+            self.backgroundColor = UIColor.themeYellow.withAlphaComponent(0.1)
+        case "Chicago":
+            posseImageView.removeFromSuperview()
+            self.layer.borderWidth = 3.0
+            self.layer.borderColor = UIColor.themeGreen.cgColor
+            self.backgroundColor = UIColor.themeGreen.withAlphaComponent(0.1)
+        case "Oakland":
+            posseImageView.removeFromSuperview()
+            self.layer.borderWidth = 3.0
+            self.layer.borderColor = UIColor.themeDarkBlue.cgColor
+            self.backgroundColor = UIColor.themeDarkBlue.withAlphaComponent(0.1)
+        default:
+            break
+        }
+    }
+    
+    // MARK: - Populate & config labels
     private func populateLabels() {
         guard let name = programmer?.name else { print("Error unwrapping programmer name in cell"); return}
         guard let favoriteColor = programmer?.favoriteColor else { print("Error unwrapping programmer fav color in cell"); return }
@@ -147,29 +172,6 @@ class BackView: UIView {
             return "No"
         } else {
             return "Yes"
-        }
-    }
-    
-    private func configBorder() {
-        guard let location = programmer?.location?.locality else { print("Error unwrapping programmer location"); return }
-        switch location {
-        case "New York":
-            posseImageView.removeFromSuperview()
-            self.layer.borderWidth = 3.0
-            self.layer.borderColor = UIColor.themeYellow.cgColor
-            self.backgroundColor = UIColor.themeYellow.withAlphaComponent(0.1)
-        case "Chicago":
-            posseImageView.removeFromSuperview()
-            self.layer.borderWidth = 3.0
-            self.layer.borderColor = UIColor.themeGreen.cgColor
-            self.backgroundColor = UIColor.themeGreen.withAlphaComponent(0.1)
-        case "Oakland":
-            posseImageView.removeFromSuperview()
-            self.layer.borderWidth = 3.0
-            self.layer.borderColor = UIColor.themeDarkBlue.cgColor
-            self.backgroundColor = UIColor.themeDarkBlue.withAlphaComponent(0.1)
-        default:
-            break
         }
     }
 }
