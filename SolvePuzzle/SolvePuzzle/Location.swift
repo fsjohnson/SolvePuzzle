@@ -42,4 +42,8 @@ struct Location {
         self.country = country
         self.services = services
     }
+    
+    init() {
+        self.init(publicId: "", locality: "", region: "", postalCode: "", country: "", services: [])
+    }
 }

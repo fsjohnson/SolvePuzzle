@@ -15,8 +15,8 @@ class Programmer {
     var weight: Double
     var phone: String
     var isArtist: Bool
-    var location: Location?
-    var platform: String?
+    var location: Location
+    var platform: String
     
     init?(dict: [String: Any]) {
         guard
@@ -34,18 +34,22 @@ class Programmer {
         self.weight = weight
         self.phone = phone
         self.isArtist = isArtist
+        self.location = Location()
+        self.platform = ""
     }
     
-    init(name: String, favoriteColor: String, age: Int, weight: Double, phone: String, isArtist: Bool) {
+    init(name: String, favoriteColor: String, age: Int, weight: Double, phone: String, isArtist: Bool, location: Location, platform: String) {
         self.name = name
         self.favoriteColor = favoriteColor
         self.age = age
         self.weight = weight
         self.phone = phone
         self.isArtist = isArtist
+        self.location = location
+        self.platform = platform
     }
     
     convenience init() {
-        self.init(name: "", favoriteColor: "", age: 0, weight: 0.0, phone: "", isArtist: false)
+        self.init(name: "", favoriteColor: "", age: 0, weight: 0.0, phone: "", isArtist: false, location: Location(publicId: "", locality: "", region: "", postalCode: "", country: "", services: []), platform: "")
     }
 }

@@ -47,7 +47,7 @@ class PuzzleViewModel {
     
     func checkCellCount() {
         if programmerArray.count < imageSlices.count {
-            let newProg = Programmer(name: "", favoriteColor: "", age: 0, weight: 0.0, phone: "", isArtist: false)
+            let newProg = Programmer()
             programmerArray.append(newProg)
         }
     }
@@ -67,9 +67,8 @@ class PuzzleViewModel {
     func populateProgrammerInfo() {
         getJson { (parsedJson) in
             for location in parsedJson {
-                let location = Location(dict: location)
-                guard let services = location?.services else { print("Error unwrapping services"); return }
-                for service in services {
+                guard let location = Location(dict: location) else { print("Error unwrapping location in populateProgInfo"); return }
+                for service in location.services {
                     guard let platform = service["platform"] as? String else { print("Error retrieving platform"); return }
                     guard let programmers = service["programmers"] as? [[String: Any]] else { print("Error getting service[programmers]"); return }
                     for prog in programmers {
@@ -84,6 +83,7 @@ class PuzzleViewModel {
         }
     }
     
+    // MARK: - Puzzle option funcs
     func tryToSolvePuzzle() {
         imageSlices.removeAll()
         programmerArray.removeAll()

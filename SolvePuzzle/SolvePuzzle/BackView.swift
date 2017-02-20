@@ -16,8 +16,10 @@ class BackView: UIView {
     weak var programmer: Programmer? {
         didSet {
             commonInit()
-            populateLabels()
-            configBorder()
+            if programmer?.name != "" {
+                populateLabels()
+                configBorder()
+            }
         }
     }
     
@@ -111,7 +113,7 @@ class BackView: UIView {
     }
     
     private func configBorder() {
-        guard let location = programmer?.location?.locality else { print("Error unwrapping programmer location"); return }
+        guard let location = programmer?.location.locality else { print("Error unwrapping programmer location"); return }
         switch location {
         case "New York":
             posseImageView.removeFromSuperview()
@@ -141,7 +143,7 @@ class BackView: UIView {
         guard let weight = programmer?.weight else { print("Error unwrapping programmer weight in cell"); return }
         guard let phone = programmer?.phone else { print("Error unwrapping programmer phone in cell"); return }
         guard let isArtist = programmer?.isArtist else { print("Error unwrapping programmer isArtist in cell"); return }
-        guard let location = programmer?.location?.locality else { print("Error unwrapping programmer location in cell"); return }
+        guard let location = programmer?.location.locality else { print("Error unwrapping programmer location in cell"); return }
         guard let platform = programmer?.platform else { print("Error unwrapping programmer platform in cell"); return }
         
         nameLabel.text = name
@@ -157,13 +159,13 @@ class BackView: UIView {
     private func formatPhoneNumber(phone: String) -> String {
         var formattedPhone = String()
         var phoneArray = Array(phone.characters)
-        phoneArray.insert("(", at: 0)
-        phoneArray.insert(")", at: 4)
-        phoneArray.insert(" ", at: 5)
-        phoneArray.insert("-", at: 9)
-        for item in phoneArray {
-            formattedPhone.append(item)
-        }
+            phoneArray.insert("(", at: 0)
+            phoneArray.insert(")", at: 4)
+            phoneArray.insert(" ", at: 5)
+            phoneArray.insert("-", at: 9)
+            for item in phoneArray {
+                formattedPhone.append(item)
+            }
         return formattedPhone
     }
     
