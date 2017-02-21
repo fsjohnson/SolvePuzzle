@@ -27,7 +27,7 @@ class PuzzleViewModel {
     }
     
     // MARK: - Populate & configure data
-    func populateImages() {
+    private func populateImages() {
         for name in 1...8 {
             if let image = UIImage(named:String(name)){
                 imageSlices.append(image)
@@ -36,7 +36,7 @@ class PuzzleViewModel {
         }
     }
     
-    func randomize() {
+    private func randomize() {
         for num in 0..<8 {
             let randomIndex = Int(arc4random_uniform(UInt32(imageSlices.count)))
             if num != randomIndex {
@@ -45,14 +45,14 @@ class PuzzleViewModel {
         }
     }
     
-    func checkCellCount() {
+    private func checkCellCount() {
         if programmerArray.count < imageSlices.count {
             let newProg = Programmer()
             programmerArray.append(newProg)
         }
     }
     
-    func getJson(with completion: @escaping ([[String: Any]]) -> Void) {
+    private func getJson(with completion: @escaping ([[String: Any]]) -> Void) {
         guard let filePath = Bundle.main.path(forResource: "ios_model_challenge", ofType: "json") else { print("error unwrapping json playgrounds file path"); return }
         do {
             let data = try? NSData(contentsOfFile: filePath, options: .uncached)
@@ -64,7 +64,7 @@ class PuzzleViewModel {
         } catch {}
     }
     
-    func populateProgrammerInfo() {
+    private func populateProgrammerInfo() {
         getJson { (parsedJson) in
             for location in parsedJson {
                 guard let location = Location(dict: location) else { print("Error unwrapping location in populateProgInfo"); return }
