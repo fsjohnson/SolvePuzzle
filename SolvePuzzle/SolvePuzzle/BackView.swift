@@ -33,49 +33,49 @@ class BackView: UIView {
     lazy var favoriteColorLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
     lazy var ageLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
     lazy var weightLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
     lazy var phoneLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
     lazy var isArtistLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
     lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
     lazy var platformLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
-        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightRegular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightMedium)
         return label
     }()
     
@@ -148,7 +148,7 @@ class BackView: UIView {
         
         nameLabel.text = name
         favoriteColorLabel.text = "Fav color: \(favoriteColor.capitalized)"
-        ageLabel.text = "Age:\(age)"
+        ageLabel.text = "Age: \(age)"
         weightLabel.text = "Weight: \(weight) lbs"
         phoneLabel.text = "Phone: \(formatPhoneNumber(phone: phone))"
         isArtistLabel.text = "Is an artist: \(formatIsArtist(isArtist: isArtist))"

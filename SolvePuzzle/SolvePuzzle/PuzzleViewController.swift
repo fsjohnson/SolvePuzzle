@@ -20,10 +20,14 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
+        
         configLayout()
         configCollectionView()
         configCellLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
     }
     
     func presentAlertWithTitle(title: String, message : String) {
@@ -54,7 +58,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         imageCollectionView.removeFromSuperview()
         configCellLayout()
         configCollectionView()
-        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
+        self.presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
     }
     
     func configCollectionView() {
@@ -103,8 +107,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         self.imageCollectionView.performBatchUpdates({
-            let itemToMove = self.puzzleViewModel.imageSlices.remove(at: sourceIndexPath.item)
-            self.puzzleViewModel.imageSlices.insert(itemToMove, at: destinationIndexPath.item)
+            self.puzzleViewModel.moveCell(from: sourceIndexPath, to: destinationIndexPath)
         }, completion: { completed in
             if self.puzzleViewModel.originalImageOrderArray == self.puzzleViewModel.imageSlices {
                 self.puzzleViewModel.isSolved = true

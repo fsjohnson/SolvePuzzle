@@ -83,7 +83,7 @@ class PuzzleViewModel {
         }
     }
     
-    // MARK: - Puzzle option funcs
+    // MARK: - Puzzle specific funcs
     func tryToSolvePuzzle() {
         imageSlices.removeAll()
         programmerArray.removeAll()
@@ -101,6 +101,11 @@ class PuzzleViewModel {
         populateImages()
         populateProgrammerInfo()
         checkCellCount()
+    }
+    
+    func moveCell(from sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let itemToMove = imageSlices.remove(at: sourceIndexPath.item)
+        imageSlices.insert(itemToMove, at: destinationIndexPath.item)
     }
     
     func playAgain() {
