@@ -3,15 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		B50C83FA1E592F960093E5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C83F91E592F960093E5F1 /* AppDelegate.swift */; };
 		B50C84011E592F960093E5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B50C84001E592F960093E5F1 /* Assets.xcassets */; };
 		B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */; };
-		B50C840F1E59314A0093E5F1 /* Programmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840E1E59314A0093E5F1 /* Programmer.swift */; };
-		B50C84111E5931630093E5F1 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84101E5931630093E5F1 /* Location.swift */; };
+		B50C840F1E59314A0093E5F1 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C840E1E59314A0093E5F1 /* Fact.swift */; };
 		B50C84161E5931CC0093E5F1 /* ios_model_challenge.json in Resources */ = {isa = PBXBuildFile; fileRef = B50C84151E5931CC0093E5F1 /* ios_model_challenge.json */; };
 		B50C84191E5931F10093E5F1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84181E5931F10093E5F1 /* Extensions.swift */; };
 		B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841A1E5932150093E5F1 /* FrontView.swift */; };
@@ -26,8 +25,7 @@
 		B50C84001E592F960093E5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B50C84051E592F960093E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
-		B50C840E1E59314A0093E5F1 /* Programmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programmer.swift; sourceTree = "<group>"; };
-		B50C84101E5931630093E5F1 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		B50C840E1E59314A0093E5F1 /* Fact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 		B50C84151E5931CC0093E5F1 /* ios_model_challenge.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ios_model_challenge.json; sourceTree = "<group>"; };
 		B50C84181E5931F10093E5F1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B50C841A1E5932150093E5F1 /* FrontView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontView.swift; sourceTree = "<group>"; };
@@ -90,8 +88,7 @@
 		B50C84121E5931980093E5F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B50C840E1E59314A0093E5F1 /* Programmer.swift */,
-				B50C84101E5931630093E5F1 /* Location.swift */,
+				B50C840E1E59314A0093E5F1 /* Fact.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -160,10 +157,11 @@
 				};
 			};
 			buildConfigurationList = B50C83F11E592F950093E5F1 /* Build configuration list for PBXProject "SolvePuzzle" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -197,9 +195,8 @@
 				B50C841F1E5932660093E5F1 /* MapCollectionViewCell.swift in Sources */,
 				B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */,
 				B50C84191E5931F10093E5F1 /* Extensions.swift in Sources */,
-				B50C840F1E59314A0093E5F1 /* Programmer.swift in Sources */,
+				B50C840F1E59314A0093E5F1 /* Fact.swift in Sources */,
 				B50C84271E5A4C3C0093E5F1 /* PuzzleViewModel.swift in Sources */,
-				B50C84111E5931630093E5F1 /* Location.swift in Sources */,
 				B50C841D1E5932370093E5F1 /* BackView.swift in Sources */,
 				B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */,
 				B50C83FA1E592F960093E5F1 /* AppDelegate.swift in Sources */,
@@ -295,7 +292,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -306,10 +304,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = D647VK95AB;
 				INFOPLIST_FILE = SolvePuzzle/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.SolvePuzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -319,10 +321,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = D647VK95AB;
 				INFOPLIST_FILE = SolvePuzzle/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.SolvePuzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

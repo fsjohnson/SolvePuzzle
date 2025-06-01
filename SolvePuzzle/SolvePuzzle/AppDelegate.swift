@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let mainController = PuzzleViewController() as UIViewController
         let navigationController = UINavigationController(rootViewController: mainController)
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.barTintColor = UIColor.themeBlue
         navigationBarAppearace.tintColor = UIColor.white
         navigationBarAppearace.isTranslucent = false
-        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16, weight: UIFontWeightHeavy), NSForegroundColorAttributeName: UIColor.white]
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.heavy), NSAttributedString.Key.foregroundColor: UIColor.white]
         return true
     }
 

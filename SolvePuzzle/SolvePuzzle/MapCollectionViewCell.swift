@@ -49,7 +49,7 @@ class MapCollectionViewCell: UICollectionViewCell {
             configBackView()
             cardViews = (frontView: backView, backView: frontView)
         }
-        let transitionOptions = UIViewAnimationOptions.transitionFlipFromLeft
+        let transitionOptions = UIView.AnimationOptions.transitionFlipFromLeft
         UIView.transition(with: self.contentView, duration: 0.5, options: transitionOptions, animations: {
             self.cardViews?.backView.removeFromSuperview()
             self.contentView.addSubview((self.cardViews?.frontView)!)

@@ -27,7 +27,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
+        presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks train facts. Don't want to play? Click \"Skip\" below.")
     }
     
     func presentAlertWithTitle(title: String, message : String) {
@@ -39,7 +39,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let skipAction = UIAlertAction(title: "Skip", style: .default) {(action: UIAlertAction) in
             self.puzzleViewModel.skipPuzzle()
             self.imageCollectionView.reloadData()
-            self.presentSuccessAlertWithTitle(title: "Next Step", message: "Click the cells below to find out about Posse's employers.")
+            self.presentSuccessAlertWithTitle(title: "Next Step", message: "Click the cells below to learn train facts.")
         }
         alertController.addAction(OKAction)
         alertController.addAction(skipAction)
@@ -48,17 +48,17 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     func configLayout() {
         self.view.backgroundColor = UIColor.white
-        self.title = "Posse Puzzle"
+        self.title = "Chase's Train Puzzle"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Play Again", style: .done, target: self, action: #selector(playAgainButton))
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12, weight: UIFontWeightSemibold), NSForegroundColorAttributeName: UIColor.white],for: UIControlState.normal)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.white],for: UIControl.State.normal)
     }
     
-    func playAgainButton() {
+    @objc func playAgainButton() {
         puzzleViewModel.playAgain()
         imageCollectionView.removeFromSuperview()
         configCellLayout()
         configCollectionView()
-        self.presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks the information on Posse's employees. Don't want to play? Click \"Skip\" below.")
+        self.presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks train facts. Don't want to play? Click \"Skip\" below.")
     }
     
     func configCollectionView() {
@@ -81,7 +81,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         guard let navHeight = navigationController?.navigationBar.frame.height else { print("Error calc nav height on collectionView"); return }
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height - navHeight
-        numberOfRows = 2.0
+        numberOfRows = 3.0
         numberOfColumns = 4.0
         spacing = 2
         sectionInsets = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
@@ -91,14 +91,14 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     // MARK: - Handle changing order of images
-    func handleLongGesture(gesture: UILongPressGestureRecognizer) {
+    @objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
         switch(gesture.state){
-        case UIGestureRecognizerState.began:
+        case UIGestureRecognizer.State.began:
             guard let selectedIndexPath = self.imageCollectionView.indexPathForItem(at: gesture.location(in: self.imageCollectionView)) else { return }
             imageCollectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
-        case UIGestureRecognizerState.changed:
+        case UIGestureRecognizer.State.changed:
             imageCollectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
-        case UIGestureRecognizerState.ended:
+        case UIGestureRecognizer.State.ended:
             imageCollectionView.endInteractiveMovement()
         default:
             imageCollectionView.cancelInteractiveMovement()
@@ -111,7 +111,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         }, completion: { completed in
             if self.puzzleViewModel.originalImageOrderArray == self.puzzleViewModel.imageSlices {
                 self.puzzleViewModel.isSolved = true
-                self.presentSuccessAlertWithTitle(title: "Great Job!", message: "Click the cells below to find out about Posse's employers.")
+                self.presentSuccessAlertWithTitle(title: "Great Job!", message: "Click the cells below to learn train facts.")
             }
         })
     }
@@ -145,7 +145,7 @@ extension PuzzleViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! MapCollectionViewCell
         cell.frontView.imageView.image = puzzleViewModel.imageSlices[indexPath.row]
-        cell.backView.programmer = puzzleViewModel.programmerArray[indexPath.row]
+        cell.backView.fact = puzzleViewModel.factArray[indexPath.row]
         return cell
     }
     

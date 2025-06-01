@@ -24,7 +24,7 @@ struct Location {
             let services = dict["services"] as? [[String: Any]],
             let postalCode = dict["postal_code"] as? String,
             let country = dict["country"] as? String
-            else { print("Error parsing JSON to Location"); return nil }
+            else { print("Error parsing JSON to Facts"); return nil }
 
         self.publicId = publicId
         self.locality = locality

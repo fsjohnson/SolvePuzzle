@@ -13,22 +13,22 @@ class PuzzleViewModel {
     
     var imageSlices: [UIImage]!
     var originalImageOrderArray: [UIImage]!
-    var programmerArray: [Programmer]!
+    var factArray: [Fact]!
     var isSolved = false
     
-    init(imageSlices: [UIImage], originalImageOrderArray: [UIImage], programmerArray: [Programmer]) {
+    init(imageSlices: [UIImage], originalImageOrderArray: [UIImage], factArray: [Fact]) {
         self.imageSlices = imageSlices
         self.originalImageOrderArray = originalImageOrderArray
-        self.programmerArray = programmerArray
+        self.factArray = factArray
     }
     
     convenience init() {
-        self.init(imageSlices: [], originalImageOrderArray: [], programmerArray: [])
+        self.init(imageSlices: [], originalImageOrderArray: [], factArray: [])
     }
     
     // MARK: - Populate & configure data
     private func populateImages() {
-        for name in 1...8 {
+        for name in 1...12 {
             if let image = UIImage(named:String(name)){
                 imageSlices.append(image)
                 originalImageOrderArray.append(image)
@@ -37,18 +37,20 @@ class PuzzleViewModel {
     }
     
     private func randomize() {
-        for num in 0..<8 {
+        for num in 0..<12 {
             let randomIndex = Int(arc4random_uniform(UInt32(imageSlices.count)))
             if num != randomIndex {
-                swap(&imageSlices[num], &imageSlices[randomIndex])
+                let temp = imageSlices[num]
+                imageSlices[num] = imageSlices[randomIndex]
+                imageSlices[randomIndex] = temp
             }
         }
     }
     
     private func checkCellCount() {
-        if programmerArray.count < imageSlices.count {
-            let newProg = Programmer()
-            programmerArray.append(newProg)
+        if factArray.count < imageSlices.count {
+            guard let newFact = Fact(dict: ["id": "", "text": ""]) else { return }
+            factArray.append(newFact)
         }
     }
     
@@ -58,27 +60,16 @@ class PuzzleViewModel {
             let data = try? NSData(contentsOfFile: filePath, options: .uncached)
             guard let castedData = data as? Data else { print("Error casting data as Data"); return }
             guard let rawDictionary = try JSONSerialization.jsonObject(with: castedData, options: []) as? [String : Any] else { print("Error serializing JSON"); return }
-            guard let response = rawDictionary["response"] as? [String: Any] else { print("Error retrieving rawDictionary[response]"); return }
-            guard let parsedJSON = response["locations"] as? [[String: Any]] else { print("Error retrieving response[locations]"); return }
+            guard let parsedJSON = rawDictionary["train_facts"] as? [[String: Any]] else { print("Error retrieving rawDictionary[train_facts]"); return }
             completion(parsedJSON)
         } catch {}
     }
     
-    private func populateProgrammerInfo() {
+    private func populateFactInfo() {
         getJson { (parsedJson) in
-            for location in parsedJson {
-                guard let location = Location(dict: location) else { print("Error unwrapping location in populateProgInfo"); return }
-                for service in location.services {
-                    guard let platform = service["platform"] as? String else { print("Error retrieving platform"); return }
-                    guard let programmers = service["programmers"] as? [[String: Any]] else { print("Error getting service[programmers]"); return }
-                    for prog in programmers {
-                        let newProg = Programmer(dict: prog)
-                        guard let unwrappedNewProg = newProg else { print("Error unwrapping programmer in populateProgrammerInfo"); return }
-                        unwrappedNewProg.location = location
-                        unwrappedNewProg.platform = platform
-                        self.programmerArray.append(unwrappedNewProg)
-                    }
-                }
+            for fact in parsedJson {
+                guard let fact = Fact(dict: fact) else { print("Error unwrapping location in populateFactInfo"); return }
+                self.factArray.append(fact)
             }
         }
     }
@@ -86,10 +77,10 @@ class PuzzleViewModel {
     // MARK: - Puzzle specific funcs
     func tryToSolvePuzzle() {
         imageSlices.removeAll()
-        programmerArray.removeAll()
+        factArray.removeAll()
         populateImages()
         randomize()
-        populateProgrammerInfo()
+        populateFactInfo()
         checkCellCount()
         isSolved = false
     }
@@ -97,9 +88,9 @@ class PuzzleViewModel {
     func skipPuzzle() {
         isSolved = true
         imageSlices.removeAll()
-        programmerArray.removeAll()
+        factArray.removeAll()
         populateImages()
-        populateProgrammerInfo()
+        populateFactInfo()
         checkCellCount()
     }
     
@@ -111,7 +102,7 @@ class PuzzleViewModel {
     func playAgain() {
         imageSlices.removeAll()
         originalImageOrderArray.removeAll()
-        programmerArray.removeAll()
+        factArray.removeAll()
         isSolved = false
     }
 }
