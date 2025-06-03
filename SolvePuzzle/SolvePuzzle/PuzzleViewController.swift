@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, MFMailComposeViewControllerDelegate {
     
     var imageCollectionView: UICollectionView!
     var sectionInsets: UIEdgeInsets!
@@ -49,8 +50,50 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     func configLayout() {
         self.view.backgroundColor = UIColor.white
         self.title = "Chase's Train Puzzle"
+        
+        let hamburgerButton = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal"),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        
+        hamburgerButton.menu = createMenu()
+        hamburgerButton.primaryAction = nil // ensures menu shows on tap
+        navigationItem.leftBarButtonItem = hamburgerButton
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Play Again", style: .done, target: self, action: #selector(playAgainButton))
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.white],for: UIControl.State.normal)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.white],for: UIControl.State.normal)
+    }
+    
+    func createMenu() -> UIMenu {
+        let contactUs = UIAction(title: "Contact Us", image: UIImage(systemName: "envelope")) { _ in
+            self.sendSupportEmail()
+        }
+        
+        let privacyPolicy = UIAction(title: "Privacy Policy", image: UIImage(systemName: "doc.text")) { _ in
+            let vc = PrivacyPolicyViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        return UIMenu(title: "", options: .displayInline, children: [contactUs, privacyPolicy])
+    }
+    
+    func sendSupportEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mailVC = MFMailComposeViewController()
+            mailVC.mailComposeDelegate = self
+            mailVC.setToRecipients(["support@runway.team"])
+            mailVC.setSubject("Support request about Puzzle Pals")
+            present(mailVC, animated: true)
+        } else if let emailURL = URL(string: "mailto:support@hello.com") {
+            UIApplication.shared.open(emailURL)
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            controller.dismiss(animated: true)
     }
     
     @objc func playAgainButton() {
@@ -58,6 +101,10 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         imageCollectionView.removeFromSuperview()
         configCellLayout()
         configCollectionView()
+        self.presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks train facts. Don't want to play? Click \"Skip\" below.")
+    }
+    
+    @objc func menuButton() {
         self.presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks train facts. Don't want to play? Click \"Skip\" below.")
     }
     

@@ -17,6 +17,7 @@
 		B50C841D1E5932370093E5F1 /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841C1E5932370093E5F1 /* BackView.swift */; };
 		B50C841F1E5932660093E5F1 /* MapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */; };
 		B50C84271E5A4C3C0093E5F1 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C84261E5A4C3C0093E5F1 /* PuzzleViewModel.swift */; };
+		B5D398C82DEE825B00392A1C /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D398C72DEE825B00392A1C /* PrivacyPolicyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B50C841C1E5932370093E5F1 /* BackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
 		B50C84261E5A4C3C0093E5F1 /* PuzzleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
+		B5D398C72DEE825B00392A1C /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */,
+				B5D398C72DEE825B00392A1C /* PrivacyPolicyViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -151,7 +154,6 @@
 				TargetAttributes = {
 					B50C83F51E592F950093E5F1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = D647VK95AB;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -198,6 +200,7 @@
 				B50C840F1E59314A0093E5F1 /* Fact.swift in Sources */,
 				B50C84271E5A4C3C0093E5F1 /* PuzzleViewModel.swift in Sources */,
 				B50C841D1E5932370093E5F1 /* BackView.swift in Sources */,
+				B5D398C82DEE825B00392A1C /* PrivacyPolicyViewController.swift in Sources */,
 				B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */,
 				B50C83FA1E592F960093E5F1 /* AppDelegate.swift in Sources */,
 			);
@@ -302,14 +305,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D647VK95AB;
+				DEVELOPMENT_TEAM = 945A93TSP6;
 				INFOPLIST_FILE = SolvePuzzle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.SolvePuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.runway.puzzlepals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -319,14 +322,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D647VK95AB;
+				DEVELOPMENT_TEAM = 945A93TSP6;
 				INFOPLIST_FILE = SolvePuzzle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.SolvePuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.runway.puzzlepals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
