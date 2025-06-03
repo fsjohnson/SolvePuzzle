@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,7 +24,6 @@
 		B50C83F61E592F960093E5F1 /* Puzzle Pals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Puzzle Pals.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50C83F91E592F960093E5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B50C84001E592F960093E5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B50C84051E592F960093E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50C840B1E59310F0093E5F1 /* PuzzleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		B50C840E1E59314A0093E5F1 /* Fact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 		B50C84151E5931CC0093E5F1 /* ios_model_challenge.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ios_model_challenge.json; sourceTree = "<group>"; };
@@ -33,16 +32,15 @@
 		B50C841C1E5932370093E5F1 /* BackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		B50C841E1E5932660093E5F1 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
 		B50C84261E5A4C3C0093E5F1 /* PuzzleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
+		B58B16912DEF91A400289944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5D398C72DEE825B00392A1C /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B50C83F31E592F950093E5F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -66,6 +64,7 @@
 		B50C83F81E592F960093E5F1 /* Puzzletopia */ = {
 			isa = PBXGroup;
 			children = (
+				B58B16912DEF91A400289944 /* Info.plist */,
 				B50C83F91E592F960093E5F1 /* AppDelegate.swift */,
 				B50C84181E5931F10093E5F1 /* Extensions.swift */,
 				B50C84171E5931D50093E5F1 /* Data */,
@@ -74,7 +73,6 @@
 				B50C84251E5A4B950093E5F1 /* ViewModels */,
 				B50C840D1E59313B0093E5F1 /* Controllers */,
 				B50C84001E592F960093E5F1 /* Assets.xcassets */,
-				B50C84051E592F960093E5F1 /* Info.plist */,
 			);
 			path = Puzzletopia;
 			sourceTree = "<group>";
@@ -135,8 +133,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = "Puzzle Pals";
 			productName = SolvePuzzle;
 			productReference = B50C83F61E592F960093E5F1 /* Puzzle Pals.app */;
@@ -159,7 +155,6 @@
 				};
 			};
 			buildConfigurationList = B50C83F11E592F950093E5F1 /* Build configuration list for PBXProject "Puzzle Pals" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -168,6 +163,7 @@
 				Base,
 			);
 			mainGroup = B50C83ED1E592F950093E5F1;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = B50C83F71E592F960093E5F1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -180,19 +176,16 @@
 /* Begin PBXResourcesBuildPhase section */
 		B50C83F41E592F950093E5F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				B50C84161E5931CC0093E5F1 /* ios_model_challenge.json in Resources */,
 				B50C84011E592F960093E5F1 /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B50C83F21E592F950093E5F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				B50C841F1E5932660093E5F1 /* MapCollectionViewCell.swift in Sources */,
 				B50C840C1E59310F0093E5F1 /* PuzzleViewController.swift in Sources */,
@@ -204,12 +197,11 @@
 				B50C841B1E5932150093E5F1 /* FrontView.swift in Sources */,
 				B50C83FA1E592F960093E5F1 /* AppDelegate.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B50C84061E592F960093E5F1 /* Debug */ = {
+		B50C84061E592F960093E5F1 /* Debug configuration for PBXProject "Puzzle Pals" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -258,7 +250,7 @@
 			};
 			name = Debug;
 		};
-		B50C84071E592F960093E5F1 /* Release */ = {
+		B50C84071E592F960093E5F1 /* Release configuration for PBXProject "Puzzle Pals" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,16 +293,16 @@
 			};
 			name = Release;
 		};
-		B50C84091E592F960093E5F1 /* Debug */ = {
+		B50C84091E592F960093E5F1 /* Debug configuration for PBXNativeTarget "Puzzle Pals" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = BAG3NST483;
-				INFOPLIST_FILE = SolvePuzzle/Info.plist;
+				INFOPLIST_FILE = /Users/felicityjohnson/SolvePuzzle/SolvePuzzle/Puzzletopia/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Puzzletopia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,16 +314,16 @@
 			};
 			name = Debug;
 		};
-		B50C840A1E592F960093E5F1 /* Release */ = {
+		B50C840A1E592F960093E5F1 /* Release configuration for PBXNativeTarget "Puzzle Pals" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = BAG3NST483;
-				INFOPLIST_FILE = SolvePuzzle/Info.plist;
+				INFOPLIST_FILE = /Users/felicityjohnson/SolvePuzzle/SolvePuzzle/Puzzletopia/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Puzzletopia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,19 +341,17 @@
 		B50C83F11E592F950093E5F1 /* Build configuration list for PBXProject "Puzzle Pals" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B50C84061E592F960093E5F1 /* Debug */,
-				B50C84071E592F960093E5F1 /* Release */,
+				B50C84061E592F960093E5F1 /* Debug configuration for PBXProject "Puzzle Pals" */,
+				B50C84071E592F960093E5F1 /* Release configuration for PBXProject "Puzzle Pals" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		B50C84081E592F960093E5F1 /* Build configuration list for PBXNativeTarget "Puzzle Pals" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B50C84091E592F960093E5F1 /* Debug */,
-				B50C840A1E592F960093E5F1 /* Release */,
+				B50C84091E592F960093E5F1 /* Debug configuration for PBXNativeTarget "Puzzle Pals" */,
+				B50C840A1E592F960093E5F1 /* Release configuration for PBXNativeTarget "Puzzle Pals" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

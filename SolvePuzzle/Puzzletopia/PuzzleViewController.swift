@@ -135,6 +135,27 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let totalWidthDeduction = (spacing + spacing + spacing + sectionInsets.right + sectionInsets.left)
         let totalHeightDeduction = (spacing + spacing + sectionInsets.bottom + sectionInsets.top)
         itemSize = CGSize(width: (screenWidth - totalWidthDeduction) / numberOfColumns, height: (screenHeight - totalHeightDeduction) / numberOfRows)
+        
+//        guard let navHeight = navigationController?.navigationBar.frame.height else {
+//                print("Error calc nav height on collectionView")
+//                return
+//            }
+//
+//            let screenWidth = UIScreen.main.bounds.width
+//            let screenHeight = UIScreen.main.bounds.height - navHeight
+//
+//            numberOfRows = 3.0
+//            numberOfColumns = 4.0
+//            spacing = 2
+//            sectionInsets = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+//
+//            let totalHorizontalSpacing = (numberOfColumns - 1) * spacing + sectionInsets.left + sectionInsets.right
+//            let totalVerticalSpacing = (numberOfRows - 1) * spacing + sectionInsets.top + sectionInsets.bottom
+//
+//            let itemWidth = (screenWidth - totalHorizontalSpacing) / numberOfColumns
+//            let itemHeight = (screenHeight - totalVerticalSpacing) / numberOfRows
+//
+//            itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
     
     // MARK: - Handle changing order of images
