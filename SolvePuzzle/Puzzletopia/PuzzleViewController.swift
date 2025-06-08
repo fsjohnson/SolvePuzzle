@@ -7,17 +7,26 @@
 //
 
 import UIKit
-import MessageUI
 
-class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, MFMailComposeViewControllerDelegate {
+class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var puzzleName: String?
     var imageCollectionView: UICollectionView!
     var sectionInsets: UIEdgeInsets!
     var spacing: CGFloat!
     var itemSize: CGSize!
     var numberOfRows: CGFloat!
     var numberOfColumns: CGFloat!
-    let puzzleViewModel = PuzzleViewModel()
+    let puzzleViewModel: PuzzleViewModel
+    
+    init(viewModel: PuzzleViewModel) {
+        self.puzzleViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,59 +58,14 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     func configLayout() {
         self.view.backgroundColor = UIColor.white
-        self.title = "Chase's Train Puzzle"
+        self.title = puzzleName ?? "Puzzle"
         
-        let hamburgerButton = UIBarButtonItem(
-            image: UIImage(systemName: "line.3.horizontal"),
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        
-        hamburgerButton.menu = createMenu()
-        hamburgerButton.primaryAction = nil // ensures menu shows on tap
-        navigationItem.leftBarButtonItem = hamburgerButton
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Play Again", style: .done, target: self, action: #selector(playAgainButton))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Start Over", style: .done, target: self, action: #selector(playAgainButton))
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.white],for: UIControl.State.normal)
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.semibold), NSAttributedString.Key.foregroundColor: UIColor.white],for: UIControl.State.normal)
-    }
-    
-    func createMenu() -> UIMenu {
-        let contactUs = UIAction(title: "Contact Us", image: UIImage(systemName: "envelope")) { _ in
-            self.sendSupportEmail()
-        }
-        
-        let privacyPolicy = UIAction(title: "Privacy Policy", image: UIImage(systemName: "doc.text")) { _ in
-            let vc = PrivacyPolicyViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        return UIMenu(title: "", options: .displayInline, children: [contactUs, privacyPolicy])
-    }
-    
-    func sendSupportEmail() {
-        if MFMailComposeViewController.canSendMail() {
-            let mailVC = MFMailComposeViewController()
-            mailVC.mailComposeDelegate = self
-            mailVC.setToRecipients(["support@runway.team"])
-            mailVC.setSubject("Support request about Puzzle Pals")
-            present(mailVC, animated: true)
-        } else if let emailURL = URL(string: "mailto:support@hello.com") {
-            UIApplication.shared.open(emailURL)
-        }
-    }
-
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-            controller.dismiss(animated: true)
     }
     
     @objc func playAgainButton() {
-        puzzleViewModel.playAgain()
-        imageCollectionView.removeFromSuperview()
-        configCellLayout()
-        configCollectionView()
-        self.presentAlertWithTitle(title: "Let's Play!", message: "Solve the puzzle by holding down on a cell and dragging it to its correct position. Solving the puzzle unlocks train facts. Don't want to play? Click \"Skip\" below.")
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func menuButton() {
@@ -135,27 +99,6 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let totalWidthDeduction = (spacing + spacing + spacing + sectionInsets.right + sectionInsets.left)
         let totalHeightDeduction = (spacing + spacing + sectionInsets.bottom + sectionInsets.top)
         itemSize = CGSize(width: (screenWidth - totalWidthDeduction) / numberOfColumns, height: (screenHeight - totalHeightDeduction) / numberOfRows)
-        
-//        guard let navHeight = navigationController?.navigationBar.frame.height else {
-//                print("Error calc nav height on collectionView")
-//                return
-//            }
-//
-//            let screenWidth = UIScreen.main.bounds.width
-//            let screenHeight = UIScreen.main.bounds.height - navHeight
-//
-//            numberOfRows = 3.0
-//            numberOfColumns = 4.0
-//            spacing = 2
-//            sectionInsets = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-//
-//            let totalHorizontalSpacing = (numberOfColumns - 1) * spacing + sectionInsets.left + sectionInsets.right
-//            let totalVerticalSpacing = (numberOfRows - 1) * spacing + sectionInsets.top + sectionInsets.bottom
-//
-//            let itemWidth = (screenWidth - totalHorizontalSpacing) / numberOfColumns
-//            let itemHeight = (screenHeight - totalVerticalSpacing) / numberOfRows
-//
-//            itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
     
     // MARK: - Handle changing order of images

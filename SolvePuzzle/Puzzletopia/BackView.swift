@@ -25,7 +25,8 @@ class BackView: UIView {
         let label = UILabel()
         label.textColor = UIColor.themeBlue
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.heavy)
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.medium)
         return label
     }()
     

@@ -1,52 +1,55 @@
 {
-  "train_facts": [
-    {
-      "id": "1",
-      "text": "The first trains were powered by steam over 200 years ago!"
+  "puzzles": {
+    "puzzle1": {
+      "name": "Steam Train",
+      "facts": [
+        { "id": "1", "text": "The first trains were powered by steam over 200 years ago!" },
+        { "id": "2", "text": "Train tracks are called railways or railroads." },
+        { "id": "3", "text": "Some trains can go really fast—faster than a cheetah!" },
+        { "id": "4", "text": "Animals like elephants helped move train cars long ago." },
+        { "id": "5", "text": "Trains cross big bridges, long tunnels, and mountains!" },
+        { "id": "6", "text": "Trains helped make time zones so people knew the time." },
+        { "id": "7", "text": "Some trains say “choo-choo” with their steam whistle." },
+        { "id": "8", "text": "Japan’s bullet trains are super speedy and called Shinkansen." },
+        { "id": "9", "text": "Trains can be pulled by engines or pushed from behind." },
+        { "id": "10", "text": "Maglev trains float above tracks using magnets—no wheels!" },
+        { "id": "11", "text": "There are trains on every continent except Antarctica." },
+        { "id": "12", "text": "Toy trains are made to look like real trains and run on tracks." }
+      ]
     },
-    {
-      "id": "2",
-      "text": "Train tracks are called railways or railroads."
+    "puzzle2": {
+      "name": "Commuter Train",
+      "facts": [
+        { "id": "1", "text": "Commuter trains take people to work and school every day." },
+        { "id": "2", "text": "They stop at many stations to pick up passengers." },
+        { "id": "3", "text": "Commuter trains usually run on electricity." },
+        { "id": "4", "text": "People sit or stand inside while the train moves fast." },
+        { "id": "5", "text": "These trains help many people travel without cars." },
+        { "id": "6", "text": "Commuter trains run on special tracks called railways." },
+        { "id": "7", "text": "They have many doors to let people get on and off quickly." },
+        { "id": "8", "text": "Some commuter trains go underground called subways." },
+        { "id": "9", "text": "Trains can be long with many cars connected together." },
+        { "id": "10", "text": "They help reduce traffic and pollution in cities." },
+        { "id": "11", "text": "People use tickets to ride commuter trains." },
+        { "id": "12", "text": "Commuter trains are very important for busy towns and cities." }
+      ]
     },
-    {
-      "id": "3",
-      "text": "Some trains can go over 300 miles per hour—that’s faster than a cheetah!"
-    },
-    {
-      "id": "4",
-      "text": "Animals like elephants used to help move train cars."
-    },
-    {
-      "id": "5",
-      "text": "Trains can cross big bridges, long tunnels, and even mountains!"
-    },
-    {
-      "id": "6",
-      "text": "The need to keep trains on time helped invent time zones."
-    },
-    {
-      "id": "7",
-      "text": "Some trains make a “choo-choo” sound with their steam whistle."
-    },
-    {
-      "id": "8",
-      "text": "Japan’s bullet trains are called “Shinkansen” and are super speedy."
-    },
-    {
-      "id": "9",
-      "text": "Trains can be pulled by engines or pushed from behind."
-    },
-    {
-      "id": "10",
-      "text": "Maglev trains float above the tracks using magnets—no wheels!"
-    },
-    {
-      "id": "11",
-      "text": "There are trains on every continent except Antarctica."
-    },
-    {
-      "id": "12",
-      "text": "Some toy trains are modeled after real trains and even run on tracks!"
+    "puzzle3": {
+      "name": "Freight Train",
+      "facts": [
+        { "id": "1", "text": "Freight trains carry things like toys, food, and cars." },
+        { "id": "2", "text": "They are very long and heavy." },
+        { "id": "3", "text": "Freight trains help move stuff across the country." },
+        { "id": "4", "text": "They pull many big cars full of goods." },
+        { "id": "5", "text": "Freight trains don’t usually carry people." },
+        { "id": "6", "text": "These trains help stores get new things to sell." },
+        { "id": "7", "text": "Freight trains can carry coal, wood, and machines." },
+        { "id": "8", "text": "They move slowly but carry lots of heavy stuff." },
+        { "id": "9", "text": "Freight trains run on tracks like all other trains." },
+        { "id": "10", "text": "They have big engines to pull heavy loads." },
+        { "id": "11", "text": "Sometimes you see freight trains at railroad crossings." },
+        { "id": "12", "text": "Freight trains help keep stores stocked with things we need." }
+      ]
     }
-  ]
+  }
 }

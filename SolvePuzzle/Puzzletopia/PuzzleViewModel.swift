@@ -11,40 +11,37 @@ import UIKit
 
 class PuzzleViewModel {
     
-    var imageSlices: [UIImage]!
-    var originalImageOrderArray: [UIImage]!
-    var factArray: [Fact]!
+    var currentPuzzleNumber: Int
+    var imageSlices: [UIImage] = []
+    var originalImageOrderArray: [UIImage] = []
+    var factArray: [Fact] = []
     var isSolved = false
     
-    init(imageSlices: [UIImage], originalImageOrderArray: [UIImage], factArray: [Fact]) {
+    init(imageSlices: [UIImage], originalImageOrderArray: [UIImage], factArray: [Fact], currentPuzzleNumber: Int) {
+        self.currentPuzzleNumber = currentPuzzleNumber
         self.imageSlices = imageSlices
         self.originalImageOrderArray = originalImageOrderArray
         self.factArray = factArray
     }
     
-    convenience init() {
-        self.init(imageSlices: [], originalImageOrderArray: [], factArray: [])
-    }
-    
     // MARK: - Populate & configure data
-    private func populateImages() {
-        for name in 1...12 {
-            if let image = UIImage(named:String(name)){
-                imageSlices.append(image)
-                originalImageOrderArray.append(image)
+    private func populateImages(puzzleNumber: Int) {
+        imageSlices.removeAll()
+            originalImageOrderArray.removeAll()
+            
+            for pieceIndex in 1...12 {
+                let imageName = "puzzle\(puzzleNumber)_\(pieceIndex)"
+                if let image = UIImage(named: imageName) {
+                    imageSlices.append(image)
+                    originalImageOrderArray.append(image)
+                } else {
+                    print("Missing image: \(imageName)")
+                }
             }
-        }
     }
     
     private func randomize() {
-        for num in 0..<12 {
-            let randomIndex = Int(arc4random_uniform(UInt32(imageSlices.count)))
-            if num != randomIndex {
-                let temp = imageSlices[num]
-                imageSlices[num] = imageSlices[randomIndex]
-                imageSlices[randomIndex] = temp
-            }
-        }
+        imageSlices.shuffle()
     }
     
     private func checkCellCount() {
@@ -54,19 +51,49 @@ class PuzzleViewModel {
         }
     }
     
-    private func getJson(with completion: @escaping ([[String: Any]]) -> Void) {
-        guard let filePath = Bundle.main.path(forResource: "ios_model_challenge", ofType: "json") else { print("error unwrapping json playgrounds file path"); return }
+    private func getFacts(for puzzleKey: String, completion: @escaping ([[String: Any]]) -> Void) {
+        guard let filePath = Bundle.main.path(forResource: "ios_model_challenge", ofType: "json") else {
+            print("error unwrapping json playgrounds file path")
+            return
+        }
+        
         do {
-            let data = try? NSData(contentsOfFile: filePath, options: .uncached)
-            guard let castedData = data as? Data else { print("Error casting data as Data"); return }
-            guard let rawDictionary = try JSONSerialization.jsonObject(with: castedData, options: []) as? [String : Any] else { print("Error serializing JSON"); return }
-            guard let parsedJSON = rawDictionary["train_facts"] as? [[String: Any]] else { print("Error retrieving rawDictionary[train_facts]"); return }
-            completion(parsedJSON)
-        } catch {}
+            let data = try NSData(contentsOfFile: filePath, options: .uncached)
+            guard let castedData = data as? Data else {
+                print("Error casting data as Data")
+                return
+            }
+            
+            guard let rawDictionary = try JSONSerialization.jsonObject(with: castedData, options: []) as? [String : Any] else {
+                print("Error serializing JSON")
+                return
+            }
+            
+            guard let puzzlesDict = rawDictionary["puzzles"] as? [String: Any] else {
+                print("Error retrieving rawDictionary[puzzles]")
+                return
+            }
+            
+            guard let puzzleData = puzzlesDict[puzzleKey] as? [String: Any] else {
+                print("Error retrieving puzzle data for key: \(puzzleKey)")
+                return
+            }
+            
+            guard let factsArray = puzzleData["facts"] as? [[String: Any]] else {
+                print("Error retrieving facts array for puzzle: \(puzzleKey)")
+                return
+            }
+            
+            completion(factsArray)
+            
+        } catch {
+            print("Error reading JSON: \(error.localizedDescription)")
+        }
     }
+
     
     private func populateFactInfo() {
-        getJson { (parsedJson) in
+        getFacts(for: "puzzle\(currentPuzzleNumber)") { (parsedJson) in
             for fact in parsedJson {
                 guard let fact = Fact(dict: fact) else { print("Error unwrapping location in populateFactInfo"); return }
                 self.factArray.append(fact)
@@ -78,7 +105,7 @@ class PuzzleViewModel {
     func tryToSolvePuzzle() {
         imageSlices.removeAll()
         factArray.removeAll()
-        populateImages()
+        populateImages(puzzleNumber: currentPuzzleNumber)
         randomize()
         populateFactInfo()
         checkCellCount()
@@ -89,7 +116,7 @@ class PuzzleViewModel {
         isSolved = true
         imageSlices.removeAll()
         factArray.removeAll()
-        populateImages()
+        populateImages(puzzleNumber: currentPuzzleNumber)
         populateFactInfo()
         checkCellCount()
     }

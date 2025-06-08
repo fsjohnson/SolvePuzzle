@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let mainController = PuzzleViewController() as UIViewController
+        let mainController = HomeViewController() as UIViewController
         let navigationController = UINavigationController(rootViewController: mainController)
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
