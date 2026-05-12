@@ -8,9 +8,8 @@ Use `app-store-connect` as the export method for TestFlight/App Store signing, o
 
 Configure these repository secrets before running it:
 
-- `BUILD_CERTIFICATE_BASE64`: base64-encoded Apple signing certificate `.p12`
-- `P12_PASSWORD`: password for the `.p12`
-- `PROVISIONING_PROFILE_BASE64`: base64-encoded `.mobileprovision` for `team.runway.puzzlepals`
+- `IOS_DISTRIBUTION_CERTIFICATE_BASE64`: base64-encoded Apple signing certificate `.p12`
+- `IOS_PROVISIONING_PROFILE_BASE64`: base64-encoded `.mobileprovision` for `team.runway.puzzlepals`
 - `KEYCHAIN_PASSWORD`: optional temporary CI keychain password
 
 On macOS, encode the files with:
