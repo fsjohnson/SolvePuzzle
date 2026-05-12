@@ -1,0 +1,263 @@
+name: Release Candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Marketing version for the RC, for example 1.0.2. Leave blank to use the project setting.
+        required: false
+        type: string
+      build_number:
+        description: Build number for the RC. Leave blank to use the GitHub run number.
+        required: false
+        type: string
+      export_method:
+        description: Xcode export method. Use app-store-connect for TestFlight/App Store, or release-testing for registered-device testing.
+        required: true
+        default: app-store-connect
+        type: string
+      team_id:
+        description: Apple Developer Team ID.
+        required: true
+        default: BAG3NST483
+        type: string
+      code_sign_identity:
+        description: Signing certificate identity.
+        required: true
+        default: Apple Distribution
+        type: string
+      create_github_prerelease:
+        description: Create a GitHub prerelease and attach the IPA.
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  build-release-candidate:
+    name: Build release candidate
+    runs-on: macos-latest
+    env:
+      PROJECT_PATH: SolvePuzzle/Puzzle Pals.xcodeproj
+      SCHEME: Puzzle Pals
+      CONFIGURATION: Release
+      BUNDLE_ID: team.runway.puzzlepals
+      EXPORT_METHOD: ${{ inputs.export_method }}
+      TEAM_ID: ${{ inputs.team_id }}
+      CODE_SIGN_IDENTITY: ${{ inputs.code_sign_identity }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Resolve RC version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          build_settings="$(xcodebuild -project "$PROJECT_PATH" -scheme "$SCHEME" -configuration "$CONFIGURATION" -showBuildSettings)"
+
+          version="${{ inputs.version }}"
+          if [ -z "$version" ]; then
+            version="$(awk -F '= ' '/MARKETING_VERSION/{print $2; exit}' <<< "$build_settings")"
+          fi
+
+          build_number="${{ inputs.build_number }}"
+          if [ -z "$build_number" ]; then
+            build_number="$GITHUB_RUN_NUMBER"
+          fi
+
+          bundle_id="$(awk -F '= ' '/PRODUCT_BUNDLE_IDENTIFIER/{print $2; exit}' <<< "$build_settings")"
+          if [ -z "$bundle_id" ]; then
+            echo "::error::Could not resolve PRODUCT_BUNDLE_IDENTIFIER from Xcode build settings."
+            exit 1
+          fi
+
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+          echo "BUILD_NUMBER=$build_number" >> "$GITHUB_ENV"
+          echo "BUNDLE_ID=$bundle_id" >> "$GITHUB_ENV"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "build_number=$build_number" >> "$GITHUB_OUTPUT"
+          echo "bundle_id=$bundle_id" >> "$GITHUB_OUTPUT"
+
+      - name: Validate signing secrets
+        shell: bash
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+        run: |
+          set -euo pipefail
+
+          missing=0
+          for name in BUILD_CERTIFICATE_BASE64 P12_PASSWORD PROVISIONING_PROFILE_BASE64; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing required secret: $name"
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Install signing assets
+        shell: bash
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          certificate_path="$RUNNER_TEMP/build_certificate.p12"
+          profile_path="$RUNNER_TEMP/profile.mobileprovision"
+          profile_plist="$RUNNER_TEMP/profile.plist"
+          keychain_password="${KEYCHAIN_PASSWORD:-$(uuidgen)}"
+          keychain_path="$RUNNER_TEMP/app-signing.keychain-db"
+
+          printf '%s' "$BUILD_CERTIFICATE_BASE64" | base64 -D > "$certificate_path"
+          printf '%s' "$PROVISIONING_PROFILE_BASE64" | base64 -D > "$profile_path"
+
+          security create-keychain -p "$keychain_password" "$keychain_path"
+          security set-keychain-settings -lut 21600 "$keychain_path"
+          security unlock-keychain -p "$keychain_password" "$keychain_path"
+          security import "$certificate_path" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$keychain_path"
+          security list-keychains -d user -s "$keychain_path"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$keychain_password" "$keychain_path"
+
+          security cms -D -i "$profile_path" > "$profile_plist"
+          profile_uuid="$(/usr/libexec/PlistBuddy -c 'Print UUID' "$profile_plist")"
+          profile_name="$(/usr/libexec/PlistBuddy -c 'Print Name' "$profile_plist")"
+          profile_team_id="$(/usr/libexec/PlistBuddy -c 'Print TeamIdentifier:0' "$profile_plist")"
+          profile_bundle_id="$(/usr/libexec/PlistBuddy -c 'Print Entitlements:application-identifier' "$profile_plist" | sed "s/^$profile_team_id\\.//")"
+
+          if [ "$profile_team_id" != "$TEAM_ID" ]; then
+            echo "::error::Provisioning profile team ID '$profile_team_id' does not match workflow team ID '$TEAM_ID'."
+            exit 1
+          fi
+
+          if [ "$profile_bundle_id" != "$BUNDLE_ID" ] && [ "$profile_bundle_id" != "*" ]; then
+            echo "::error::Provisioning profile bundle ID '$profile_bundle_id' does not match '$BUNDLE_ID'."
+            exit 1
+          fi
+
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          installed_profile_path="$HOME/Library/MobileDevice/Provisioning Profiles/$profile_uuid.mobileprovision"
+          cp "$profile_path" "$installed_profile_path"
+
+          echo "PROFILE_NAME=$profile_name" >> "$GITHUB_ENV"
+          echo "KEYCHAIN_PATH=$keychain_path" >> "$GITHUB_ENV"
+          echo "INSTALLED_PROFILE_PATH=$installed_profile_path" >> "$GITHUB_ENV"
+
+      - name: Archive app
+        id: archive
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          artifact_dir="$GITHUB_WORKSPACE/build/release-candidate"
+          archive_path="$artifact_dir/PuzzlePals-$VERSION-$BUILD_NUMBER.xcarchive"
+          mkdir -p "$artifact_dir"
+
+          xcodebuild clean archive \
+            -project "$PROJECT_PATH" \
+            -scheme "$SCHEME" \
+            -configuration "$CONFIGURATION" \
+            -destination "generic/platform=iOS" \
+            -archivePath "$archive_path" \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            MARKETING_VERSION="$VERSION" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
+            CODE_SIGN_STYLE=Manual \
+            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
+            CODE_SIGN_IDENTITY="$CODE_SIGN_IDENTITY"
+
+          echo "archive_path=$archive_path" >> "$GITHUB_OUTPUT"
+          echo "ARCHIVE_PATH=$archive_path" >> "$GITHUB_ENV"
+
+      - name: Export IPA
+        id: export
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          export_path="$GITHUB_WORKSPACE/build/release-candidate/export"
+          export_options="$RUNNER_TEMP/ExportOptions.plist"
+          mkdir -p "$export_path"
+
+          /usr/libexec/PlistBuddy -c "Clear dict" "$export_options"
+          /usr/libexec/PlistBuddy -c "Add :method string $EXPORT_METHOD" "$export_options"
+          /usr/libexec/PlistBuddy -c "Add :teamID string $TEAM_ID" "$export_options"
+          /usr/libexec/PlistBuddy -c "Add :signingStyle string manual" "$export_options"
+          /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" "$export_options"
+          /usr/libexec/PlistBuddy -c "Add :provisioningProfiles:$BUNDLE_ID string $PROFILE_NAME" "$export_options"
+          /usr/libexec/PlistBuddy -c "Add :stripSwiftSymbols bool true" "$export_options"
+
+          xcodebuild -exportArchive \
+            -archivePath "$ARCHIVE_PATH" \
+            -exportOptionsPlist "$export_options" \
+            -exportPath "$export_path"
+
+          dsym_zip="$GITHUB_WORKSPACE/build/release-candidate/PuzzlePals-$VERSION-$BUILD_NUMBER.dSYMs.zip"
+          ditto -c -k --keepParent "$ARCHIVE_PATH/dSYMs" "$dsym_zip"
+
+          echo "export_path=$export_path" >> "$GITHUB_OUTPUT"
+          echo "dsym_zip=$dsym_zip" >> "$GITHUB_OUTPUT"
+          echo "EXPORT_PATH=$export_path" >> "$GITHUB_ENV"
+          echo "DSYM_ZIP=$dsym_zip" >> "$GITHUB_ENV"
+
+      - name: Upload RC artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PuzzlePals-${{ steps.version.outputs.version }}-${{ steps.version.outputs.build_number }}-rc
+          if-no-files-found: error
+          path: |
+            ${{ steps.export.outputs.export_path }}/*.ipa
+            ${{ steps.export.outputs.dsym_zip }}
+
+      - name: Create GitHub prerelease
+        if: ${{ inputs.create_github_prerelease }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          tag="rc-$VERSION-$BUILD_NUMBER"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "::error::Tag '$tag' already exists."
+            exit 1
+          fi
+
+          git tag "$tag" "$GITHUB_SHA"
+          git push origin "$tag"
+          gh release create "$tag" \
+            "$EXPORT_PATH"/*.ipa \
+            "$DSYM_ZIP" \
+            --prerelease \
+            --title "Puzzle Pals $VERSION ($BUILD_NUMBER) RC" \
+            --notes "Release candidate built from $GITHUB_SHA."
+
+      - name: Clean up signing assets
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -n "${KEYCHAIN_PATH:-}" ]; then
+            security delete-keychain "$KEYCHAIN_PATH" || true
+          fi
+
+          if [ -n "${INSTALLED_PROFILE_PATH:-}" ]; then
+            rm -f "$INSTALLED_PROFILE_PATH"
+          fi
