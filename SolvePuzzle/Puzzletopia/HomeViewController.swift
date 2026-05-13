@@ -104,7 +104,7 @@ class HomeViewController: UIViewController, MFMailComposeViewControllerDelegate 
             if answer == correctAnswer {
                 self.sendSupportEmail()
             } else {
-                self.showError("That’s not correct. Please try again.")
+                self.showError("That’s not correct. Please try again!")
             }
         }
         
