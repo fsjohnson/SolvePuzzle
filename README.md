@@ -1,4 +1,4 @@
-# SolvePuzzle
+# SolvePuzzle - puzzletopia
 
 ## Release candidate builds
 
